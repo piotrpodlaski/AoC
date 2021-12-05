@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 def readData(fname):
 	lines=[]
 	with open(fname) as f:
@@ -40,3 +43,16 @@ def countMultiples(diagram):
 lines=readData('in.txt')
 print(countMultiples(markLines(lines)))
 print(countMultiples(markLines(lines,True)))
+diagram=markLines(lines,True)
+x=[]
+y=[]
+for a in diagram:
+	for i in range(diagram[a]):
+		x.append(a[0])
+		y.append(a[1])
+		
+plt.hist2d(x, y,bins = [np.arange(0, 1000, 1), np.arange(0,1000,1)])
+cbar = plt.colorbar()
+cbar.ax.set_ylabel('Counts')
+plt.show()
+print(len(x),len(y))
